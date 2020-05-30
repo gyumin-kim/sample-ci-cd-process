@@ -1,5 +1,11 @@
 language: java  # indicates I want to use Java environment
 jdk:  # which Docker image to download from DockerHub
   - openjdk11
+
+before_install:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker pull openjdk:11-jre-slim-sid
+
 script: # what command to run
   - ./mvnw clean install
+  - ./mvnw deploy jib:build -P deploy-docker
