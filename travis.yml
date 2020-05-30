@@ -1,0 +1,5 @@
+language: java  # indicates I want to use Java environment
+jdk:  # which Docker image to download from DockerHub
+  - openjdk11
+script: # what command to run
+  - ./mvnw clean install
